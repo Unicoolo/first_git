@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.purple,
           fontFamily: GoogleFonts.montserrat().fontFamily,
-      ),
+      ),debugShowCheckedModeBanner: false,
+
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
