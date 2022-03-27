@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/utils/routes.dart';
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatefulWidget{
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool changeButton=false;
+  String name="";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -16,7 +23,7 @@ class LoginPage extends StatelessWidget{
                 height: 20.0,
               ),
               Text(
-                "Welcome",
+                "Welcome $name",
                 style:TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -32,6 +39,10 @@ class LoginPage extends StatelessWidget{
                         hintText: "Enter Username",
                         labelText: "Username",
                       ),
+                      onChanged: (value){
+                        name=value;
+                        setState(() {});
+                      },
                     ),
                     TextFormField(
                       obscureText: true,
@@ -41,13 +52,42 @@ class LoginPage extends StatelessWidget{
                       ),
                     ),
                     SizedBox(height: 20.0,),
-                    ElevatedButton(
+                    /*ElevatedButton(
                       onPressed:() {
                         Navigator.pushNamed(context, MyRoutes.homeRoute);
                       },
                       child: Text("Login"),
                       style: TextButton.styleFrom(maximumSize: Size(550, 40)),
+                    )*/
+                    InkWell(
+                        onTap: () async {
+                          setState(() {
+                            changeButton=true;
+                          });
+                          await Future.delayed(Duration(seconds: 2));
+                          Navigator.pushNamed(context, MyRoutes.homeRoute);
+
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(seconds: 2),
+                          width:changeButton ? 50: 150,
+                          height: 50,
+                          alignment: Alignment.center,
+                          child:changeButton?Icon(Icons.done,color:Colors.white,): Text(
+                            "Login",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.deepPurple,
+                              //shape: changeButton ? BoxShape.circle:BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(changeButton? 50:8)
+                          ),
+                        )
                     )
+
                   ],
                 ),
               )
@@ -57,5 +97,4 @@ class LoginPage extends StatelessWidget{
       ),
     );
   }
-
 }
