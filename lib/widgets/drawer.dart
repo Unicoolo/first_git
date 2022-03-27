@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget{
            ),
          ),
          ListTile(
-           Colors.deepPurple;
+
            leading: Icon(Icons.home),
            title: Text("Home",textScaleFactor: 1.2,),
          ),
