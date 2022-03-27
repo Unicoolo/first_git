@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/models/catalog.dart';
 import 'package:untitled2/widgets/drawer.dart';
+
+import '../widgets/item_widget.dart';
 
 class HomePage extends StatelessWidget{
   final int days=30;
@@ -10,11 +13,15 @@ class HomePage extends StatelessWidget{
         title: Text("Moaven App"),
       ),
       drawer: MyDrawer(),
-      body: Center(
-        child: Container(
-          child: Text("Hello $days World"),
+      body:Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+            itemCount:CatalogModel.items.length,
+            itemBuilder: (context,index){
+              return ItemWidget(item: CatalogModel.items[index],);
+            }
         ),
-      ),
+      )
     );
   }
 }
